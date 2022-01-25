@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  pcshoneypotapi:
+    image : launch-sniper:latest
+    container_name: launch-sniper
+    stdin_open: true
+    tty: true
+    restart: always
+    volumes:
+      - type: bind
+        source: ./.env
+        target: /app/.env
+
