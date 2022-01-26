@@ -6,9 +6,9 @@ Join our community: https://t.me/jayasankarbots
 
  With all of my bots you can find pre-compiled binaries in the dist folder. You should be able to run this bot anywhere (even mobile) without worrying about other dependencies.
 
-1. rename env.example to .env
-2. edit .env
-3. Snipe that shit
+
+1. edit .env
+2. Snipe that shit
 
 ```
 # Your wallet address
