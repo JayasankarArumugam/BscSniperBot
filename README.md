@@ -1,4 +1,4 @@
-# Launch Sniper
+# Fair Launch Sniper
 Join our community:      Channel : https://t.me/bscsniperbotchannel 
                          Group: https://t.me/+fftMFXRZGqk4ODc1
 
