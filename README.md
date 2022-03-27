@@ -1,6 +1,6 @@
 # Launch Sniper
-
-Join our community: https://t.me/jayasankarbots
+Join our community:      Channel : https://t.me/bscsniperbotchannel 
+                         Group: https://t.me/+fftMFXRZGqk4ODc1
 
 ## Donation Address: 0x581424c4ED701F261f0A963386cc437Ed986ea34
 ## Usage
