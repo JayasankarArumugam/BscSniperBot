@@ -1,20 +1,11 @@
 "use strict";
 const ethers = require("ethers");
 const retry = require("async-retry");
+const request = require('request');
 const pcsAbi = new ethers.utils.Interface(require("./abi.json"));
 const EXPECTED_PONG_BACK = 30000;
 const KEEP_ALIVE_CHECK_INTERVAL = 15000;
 const dotenv = require("dotenv");
-
-console.log("Welcome to Jayasankar's Bots.")
-console.log("Join our community: https://t.me/jayasankarbots")
-
-console.log("     ██╗ █████╗ ██╗   ██╗ █████╗ ███████╗ █████╗ ███╗   ██╗██╗  ██╗ █████╗ ██████╗ ███████╗    ██████╗  ██████╗ ████████╗███████╗")
-console.log("     ██║██╔══██╗╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗████╗  ██║██║ ██╔╝██╔══██╗██╔══██╗██╔════╝    ██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝")
-console.log("     ██║███████║ ╚████╔╝ ███████║███████╗███████║██╔██╗ ██║█████╔╝ ███████║██████╔╝███████╗    ██████╔╝██║   ██║   ██║   ███████╗")
-console.log("██   ██║██╔══██║  ╚██╔╝  ██╔══██║╚════██║██╔══██║██║╚██╗██║██╔═██╗ ██╔══██║██╔══██╗╚════██║    ██╔══██╗██║   ██║   ██║   ╚════██║")
-console.log("╚█████╔╝██║  ██║   ██║   ██║  ██║███████║██║  ██║██║ ╚████║██║  ██╗██║  ██║██║  ██║███████║    ██████╔╝╚██████╔╝   ██║   ███████║")
-console.log(" ╚════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝    ╚═════╝  ╚═════╝    ╚═╝   ╚══════╝")
 
 const result = dotenv.config();
 if (result.error) {
@@ -33,11 +24,16 @@ if (!process.env.RECIPIENT) {
   );
 }
 
+
+console.log("Welcome to BSC Sniper Bots.")
+console.log("Channel : https://t.me/bscsniperbotchannel");
+console.log("Group: https://t.me/+fftMFXRZGqk4ODc1");
+
 const tokens = {
   router: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
   purchaseAmount: process.env.PURCHASEAMOUNT || "0.01",
   pair: [
-    "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    process.env.PAIR,
     process.env.TOKEN,
   ],
   GASLIMIT: process.env.GASLIMIT || "1000000",
@@ -93,16 +89,14 @@ const startConnection = () => {
           }
           if (tx && tx.to) {
             if (tx.to === tokens.router) {
-              const re1 = new RegExp("^0xf305d719");
-              if (re1.test(tx.data)) {
+              if (tx != null && (tx.data.includes("0xf305d719") || tx.data.includes("0xe8e33700"))) {
+                console.log("Match add liquidity event ");
+                console.log("Event add " + tx.value + " from " + tx.from);
                 const decodedInput = pcsAbi.parseTransaction({
                   data: tx.data,
                   value: tx.value,
                 });
-                if (
-                  ethers.utils.getAddress(tokens.pair[1]) ===
-                  decodedInput.args[0]
-                ) {
+                if (ethers.utils.getAddress(tokens.pair[1]) === decodedInput.args[0]) {
                   provider.off("pending");
                   await Wait(tokens.buyDelay);
                   await BuyToken(tx);
@@ -138,6 +132,7 @@ const BuyToken = async (txLP) => {
   const tx = await retry(
     async () => {
       const amountOutMin = 0; // I don't like this but it works
+      console.log("Start buying token " + tokens.pair[1]);
       let buyConfirmation = await router.swapExactETHForTokens(
         amountOutMin,
         tokens.pair,

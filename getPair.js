@@ -19,7 +19,7 @@ const run = async () => {
     account
   );
   const pairAddress = await factory.getPair(
-    "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", // wbnb
+    process.env.PAIR, // wbnb
     args[0]
   );
   console.log("pairAddress: " + pairAddress);

@@ -16,15 +16,19 @@
   "dependencies": {
     "async-retry": "^1.3.3",
     "dotenv": "^10.0.0",
-    "ethers": "^5.5.1"
+    "ethers": "^5.5.1",
+    "pkg": "^5.5.2",
+    "request": "^2.88.2"
   },
   "pkg": {
     "assets": [
       "./abi.json"
     ],
     "targets": [
-      "node16-linux-x64"
+      "node16-linux-x64",
+      "node16-win-x64",
+      "node16-mac-x64"
     ],
-    "outputPath": "dist"
+    "outputPath": "bot"
   }
 }
