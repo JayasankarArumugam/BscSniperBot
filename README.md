@@ -1,11 +1,13 @@
 # Fair Launch Sniper
-Join our community:      Channel : https://t.me/bscsniperbotchannel 
-                         Group: https://t.me/+fftMFXRZGqk4ODc1
+Join our community:      
+Channel : https://t.me/bscsniperbotchannel 
+Group: https://t.me/+fftMFXRZGqk4ODc1
 
 ## Donation Address: 0x581424c4ED701F261f0A963386cc437Ed986ea34
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/Jayasankar)
 ## Usage
 
- With all of my bots you can find pre-compiled binaries in the dist folder. You should be able to run this bot anywhere (even mobile) without worrying about other dependencies.
+ With all of my bots you can find pre-compiled binaries in the ./bot folder. You should be able to run this bot anywhere (even mobile) without worrying about other dependencies.
 
 
 1. edit .env
